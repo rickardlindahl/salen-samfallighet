@@ -1,19 +1,14 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import type { FirebaseOptions } from "firebase/app";
-import { firebaseConfig } from "~/firebase.config";
 import { requireUserSession } from "~/utils/session.server";
 
-export const loader: LoaderFunction = async ({
-  request,
-}): Promise<{ displayName: string; firebaseConfig: FirebaseOptions }> => {
+export const loader: LoaderFunction = async ({ request }): Promise<{ displayName: string }> => {
   const session = await requireUserSession(request);
 
   const displayName: string = await session.get("displayName");
 
   return {
     displayName,
-    firebaseConfig,
   };
 };
 

@@ -1,12 +1,11 @@
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type { ActionFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Form, useLoaderData, useSubmit } from "@remix-run/react";
-import type { FirebaseOptions } from "firebase/app";
+import { Form, useSubmit } from "@remix-run/react";
 import { initializeApp } from "firebase/app";
 import { connectAuthEmulator, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import React, { useRef, useState } from "react";
-import { firebaseConfig } from "~/firebase.config";
-import { createUserSession, getUserSession } from "~/utils/session.server";
+import { getFirebaseConfig } from "~/firebase.config";
+import { createUserSession } from "~/utils/session.server";
 
 interface ErrorResponse {
   code: string;
@@ -31,22 +30,9 @@ export const action: ActionFunction = async ({ request }) => {
   }
 };
 
-export const loader: LoaderFunction = async ({
-  request,
-}): Promise<{ displayName: string; firebaseConfig: FirebaseOptions }> => {
-  const session = await getUserSession(request);
-  const displayName: string = await session.get("displayName");
-
-  return {
-    displayName,
-    firebaseConfig,
-  };
-};
-
 export default function Login() {
   const [error, setError] = useState<ErrorResponse | null>(null);
   const submit = useSubmit();
-  const { firebaseConfig } = useLoaderData();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const idTokenRef = useRef<HTMLInputElement>(null);
@@ -56,12 +42,10 @@ export default function Login() {
     evt.preventDefault();
 
     try {
-      initializeApp(firebaseConfig);
+      initializeApp(getFirebaseConfig(window.ENV.USE_FIREBASE_EMULATOR));
       const auth = getAuth();
-      // TODO: add an env check for USE_EMULATOR
-      // https://remix.run/docs/en/v1.0.6/guides/envvars#browser-environment-variables
-      if (!auth.emulatorConfig) {
-        console.log("connectAuthEmulator");
+
+      if (window.ENV.USE_FIREBASE_EMULATOR && !auth.emulatorConfig) {
         connectAuthEmulator(auth, "http://localhost:9099");
       }
 
