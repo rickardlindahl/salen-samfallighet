@@ -4,7 +4,7 @@ import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from "@re
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "New Remix App",
-  viewport: "width=device-width,initial-scale=1",
+  viewport: "width=device-width,initial-scale=1"
 });
 
 export default function App() {
