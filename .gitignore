@@ -11,3 +11,5 @@ node_modules
 /api/index.js.map
 
 firebaseServiceAccountKey.json
+firebase-debug.log
+ui-debug.log

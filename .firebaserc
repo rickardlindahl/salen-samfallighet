@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "development": "demo-salen-samfallighetsforening",
+    "production": "salen-samfallighetsforening"
+  }
+}
