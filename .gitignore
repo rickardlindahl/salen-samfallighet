@@ -9,3 +9,7 @@ node_modules
 /public/build
 /api/index.js
 /api/index.js.map
+
+firebaseServiceAccountKey.json
+firebase-debug.log
+ui-debug.log

@@ -2,7 +2,6 @@
   "extends": ["@remix-run/eslint-config", "@remix-run/eslint-config/node", "prettier"],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": ["error"],
-    "arrow-parens": ["error", "as-needed"]
+    "prettier/prettier": ["error"]
   }
 }
