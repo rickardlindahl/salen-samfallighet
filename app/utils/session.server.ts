@@ -37,7 +37,7 @@ export async function createUserSession(user: User, redirectTo?: string) {
   try {
     const session = await getSession();
     session.set("idToken", user.idToken);
-    session.set("displayName", user.displayName);
+    session.set("email", user.email);
 
     if (redirectTo) {
       return redirect(redirectTo, {

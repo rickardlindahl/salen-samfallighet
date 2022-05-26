@@ -16,9 +16,9 @@ export const action: ActionFunction = async ({ request }) => {
   try {
     const formData = await request.formData();
     const idToken = formData.get("idToken")!.toString();
-    const displayName = formData.get("displayName")!.toString();
+    const email = formData.get("email")!.toString();
 
-    return createUserSession({ idToken, displayName }, "/");
+    return createUserSession({ idToken, email }, "/");
   } catch (error) {
     return json(
       {
@@ -36,7 +36,6 @@ export default function Login() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const idTokenRef = useRef<HTMLInputElement>(null);
-  const displayNameRef = useRef<HTMLInputElement>(null);
 
   const handleLogin: React.FormEventHandler<HTMLFormElement> = async evt => {
     evt.preventDefault();
@@ -55,7 +54,6 @@ export default function Login() {
       await signOut(auth);
 
       idTokenRef.current!.value = idToken;
-      displayNameRef.current!.value = user.displayName ?? "";
 
       submit(evt.target as HTMLFormElement);
     } catch (error) {
@@ -72,11 +70,10 @@ export default function Login() {
           <input type="text" id="email" name="email" ref={emailRef} />
           <br />
 
-          <label htmlFor="email">Password:</label>
+          <label htmlFor="password">Password:</label>
           <input type="password" id="password" name="password" ref={passwordRef} />
 
           <input type="hidden" name="idToken" ref={idTokenRef} />
-          <input type="hidden" name="displayName" ref={displayNameRef} />
           <br />
           <button type="submit">Login</button>
           {error?.code && (
