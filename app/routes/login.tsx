@@ -67,11 +67,11 @@ const Login = () => {
       <section>
         <Form method="post" onSubmit={handleLogin}>
           <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" ref={emailRef} />
+          <input type="email" id="email" name="email" ref={emailRef} required />
           <br />
 
           <label htmlFor="password">Password:</label>
-          <input type="password" id="password" name="password" ref={passwordRef} />
+          <input type="password" id="password" name="password" ref={passwordRef} required />
 
           <input type="hidden" name="idToken" ref={idTokenRef} />
           <br />
