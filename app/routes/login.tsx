@@ -16,9 +16,9 @@ export const action: ActionFunction = async ({ request }) => {
   try {
     const formData = await request.formData();
     const idToken = formData.get("idToken")!.toString();
-    const displayName = formData.get("displayName")!.toString();
+    const email = formData.get("email")!.toString();
 
-    return createUserSession({ idToken, displayName }, "/");
+    return createUserSession({ idToken, email }, "/");
   } catch (error) {
     return json(
       {
@@ -30,13 +30,12 @@ export const action: ActionFunction = async ({ request }) => {
   }
 };
 
-export default function Login() {
+const Login = () => {
   const [error, setError] = useState<ErrorResponse | null>(null);
   const submit = useSubmit();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const idTokenRef = useRef<HTMLInputElement>(null);
-  const displayNameRef = useRef<HTMLInputElement>(null);
 
   const handleLogin: React.FormEventHandler<HTMLFormElement> = async evt => {
     evt.preventDefault();
@@ -55,7 +54,6 @@ export default function Login() {
       await signOut(auth);
 
       idTokenRef.current!.value = idToken;
-      displayNameRef.current!.value = user.displayName ?? "";
 
       submit(evt.target as HTMLFormElement);
     } catch (error) {
@@ -69,14 +67,13 @@ export default function Login() {
       <section>
         <Form method="post" onSubmit={handleLogin}>
           <label htmlFor="email">Email:</label>
-          <input type="text" id="email" name="email" ref={emailRef} />
+          <input type="email" id="email" name="email" ref={emailRef} required />
           <br />
 
-          <label htmlFor="email">Password:</label>
-          <input type="password" id="password" name="password" ref={passwordRef} />
+          <label htmlFor="password">Password:</label>
+          <input type="password" id="password" name="password" ref={passwordRef} required />
 
           <input type="hidden" name="idToken" ref={idTokenRef} />
-          <input type="hidden" name="displayName" ref={displayNameRef} />
           <br />
           <button type="submit">Login</button>
           {error?.code && (
@@ -88,4 +85,6 @@ export default function Login() {
       </section>
     </div>
   );
-}
+};
+
+export default Login;

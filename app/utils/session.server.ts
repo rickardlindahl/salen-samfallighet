@@ -23,7 +23,16 @@ export const getUserSession = (request: Request): Promise<Session> => {
   return getSession(request.headers.get("Cookie"));
 };
 
-export async function requireUserSession(request: Request) {
+export const getUserFromSession = async (session: Session): Promise<User> => {
+  const [email, idToken] = await Promise.all<[string, string]>([session.get("email"), session.get("idToken")]);
+
+  return {
+    email,
+    idToken,
+  };
+};
+
+export const requireUserSession = async (request: Request): Promise<Session> => {
   const session = await getUserSession(request);
 
   if (!session.has("idToken")) {
@@ -31,13 +40,13 @@ export async function requireUserSession(request: Request) {
   }
 
   return session;
-}
+};
 
-export async function createUserSession(user: User, redirectTo?: string) {
+export const createUserSession = async (user: User, redirectTo?: string): Promise<Response> => {
   try {
     const session = await getSession();
     session.set("idToken", user.idToken);
-    session.set("displayName", user.displayName);
+    session.set("email", user.email);
 
     if (redirectTo) {
       return redirect(redirectTo, {
@@ -67,4 +76,4 @@ export async function createUserSession(user: User, redirectTo?: string) {
       },
     );
   }
-}
+};
