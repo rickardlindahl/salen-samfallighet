@@ -2,6 +2,7 @@ export interface PostDocumentData {
   author: string;
   content: string;
   title: string;
+  timestamp: FirebaseFirestore.Timestamp;
 }
 
 export interface Post {

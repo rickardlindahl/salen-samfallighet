@@ -10,7 +10,7 @@ export const postConverter: FirebaseFirestore.FirestoreDataConverter<Post> = {
 
     return {
       ...data,
-      publishDate: snapshot.createTime.seconds * 1000,
+      publishDate: data.timestamp.seconds * 1000,
       id: snapshot.id,
     };
   },
