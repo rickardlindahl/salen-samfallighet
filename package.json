@@ -10,7 +10,7 @@
     "format:fix": "npm run prettier -- --write",
     "lint": "eslint app",
     "lint:fix": "npm run lint -- --fix",
-    "firebase:emulator": "npx firebase emulators:start --project development --only auth"
+    "firebase:emulator": "npx firebase emulators:start --project development --only auth,firestore"
   },
   "dependencies": {
     "@remix-run/node": "^1.5.1",

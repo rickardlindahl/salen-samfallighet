@@ -1,7 +1,9 @@
+import { firestore } from "firebase-admin";
 import type { App, AppOptions } from "firebase-admin/app";
 import { applicationDefault, getApp, getApps, initializeApp } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 import { getFirebaseConfig } from "~/firebase.config";
+import { postConverter } from "./converters";
 
 const getAppOptions = (isDevelopment: boolean): AppOptions =>
   isDevelopment
@@ -12,3 +14,9 @@ export const app: App =
   getApps().length === 0 ? initializeApp(getAppOptions(process.env.NODE_ENV === "development")) : getApp();
 
 export const auth = getAuth();
+
+const firestoreDB = firestore();
+
+export const db = {
+  posts: firestoreDB.collection("posts").withConverter(postConverter),
+};
