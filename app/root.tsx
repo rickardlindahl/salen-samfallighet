@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from "@remix-run/react";
 
@@ -16,15 +16,15 @@ declare global {
   }
 }
 
-export async function loader() {
+export const loader: LoaderFunction = async () => {
   return json({
     ENV: {
       USE_FIREBASE_EMULATOR: process.env.USE_FIREBASE_EMULATOR === "true",
     },
   });
-}
+};
 
-export default function App() {
+const App = () => {
   const data: { ENV: Window["ENV"] } = useLoaderData();
 
   return (
@@ -46,4 +46,6 @@ export default function App() {
       </body>
     </html>
   );
-}
+};
+
+export default App;

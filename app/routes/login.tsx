@@ -30,7 +30,7 @@ export const action: ActionFunction = async ({ request }) => {
   }
 };
 
-export default function Login() {
+const Login = () => {
   const [error, setError] = useState<ErrorResponse | null>(null);
   const submit = useSubmit();
   const emailRef = useRef<HTMLInputElement>(null);
@@ -85,4 +85,6 @@ export default function Login() {
       </section>
     </div>
   );
-}
+};
+
+export default Login;

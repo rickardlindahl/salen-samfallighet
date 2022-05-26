@@ -9,7 +9,7 @@ export const loader: LoaderFunction = async ({ request }): Promise<User> => {
   return getUserFromSession(session);
 };
 
-export default function Index() {
+const Index = () => {
   const { email } = useLoaderData();
 
   return (
@@ -18,4 +18,6 @@ export default function Index() {
       {email && <p>Hello, {email}</p>}
     </div>
   );
-}
+};
+
+export default Index;

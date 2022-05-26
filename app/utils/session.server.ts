@@ -32,7 +32,7 @@ export const getUserFromSession = async (session: Session): Promise<User> => {
   };
 };
 
-export async function requireUserSession(request: Request) {
+export const requireUserSession = async (request: Request): Promise<Session> => {
   const session = await getUserSession(request);
 
   if (!session.has("idToken")) {
@@ -40,9 +40,9 @@ export async function requireUserSession(request: Request) {
   }
 
   return session;
-}
+};
 
-export async function createUserSession(user: User, redirectTo?: string) {
+export const createUserSession = async (user: User, redirectTo?: string): Promise<Response> => {
   try {
     const session = await getSession();
     session.set("idToken", user.idToken);
@@ -76,4 +76,4 @@ export async function createUserSession(user: User, redirectTo?: string) {
       },
     );
   }
-}
+};
