@@ -67,7 +67,7 @@ const Login = () => {
       <section>
         <Form method="post" onSubmit={handleLogin}>
           <label htmlFor="email">Email:</label>
-          <input type="text" id="email" name="email" ref={emailRef} />
+          <input type="email" id="email" name="email" ref={emailRef} />
           <br />
 
           <label htmlFor="password">Password:</label>
