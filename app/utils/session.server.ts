@@ -23,6 +23,15 @@ export const getUserSession = (request: Request): Promise<Session> => {
   return getSession(request.headers.get("Cookie"));
 };
 
+export const getUserFromSession = async (session: Session): Promise<User> => {
+  const [email, idToken] = await Promise.all<[string, string]>([session.get("email"), session.get("idToken")]);
+
+  return {
+    email,
+    idToken,
+  };
+};
+
 export async function requireUserSession(request: Request) {
   const session = await getUserSession(request);
 

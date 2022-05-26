@@ -1,15 +1,12 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { requireUserSession } from "~/utils/session.server";
+import type { User } from "~/types/user";
+import { getUserFromSession, requireUserSession } from "~/utils/session.server";
 
-export const loader: LoaderFunction = async ({ request }): Promise<{ email: string }> => {
+export const loader: LoaderFunction = async ({ request }): Promise<User> => {
   const session = await requireUserSession(request);
 
-  const email: string = await session.get("email");
-
-  return {
-    email,
-  };
+  return getUserFromSession(session);
 };
 
 export default function Index() {
