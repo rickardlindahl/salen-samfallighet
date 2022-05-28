@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@material-tailwind/react";
 import type { LinksFunction, LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from "@remix-run/react";
@@ -51,4 +52,10 @@ const App = () => {
   );
 };
 
-export default App;
+const AppWithProviders = () => (
+  <ThemeProvider>
+    <App />
+  </ThemeProvider>
+);
+
+export default AppWithProviders;

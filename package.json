@@ -16,6 +16,7 @@
     "firebase:emulators:export": "npx firebase emulators:export --project development ./firebase-seed"
   },
   "dependencies": {
+    "@material-tailwind/react": "^1.0.3",
     "@remix-run/node": "^1.5.1",
     "@remix-run/react": "^1.5.1",
     "@remix-run/vercel": "^1.5.1",
