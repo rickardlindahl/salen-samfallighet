@@ -15,16 +15,18 @@ if (!firebasePrivateKey) {
   throw new Error("FIREBASE_PRIVATE_KEY must be set");
 }
 
+const { projectId } = getFirebaseConfig(process.env.USE_FIREBASE_EMULATOR === "true");
+
 const getAppOptions = (isDevelopment: boolean): AppOptions =>
   isDevelopment
-    ? { projectId: getFirebaseConfig(process.env.USE_FIREBASE_EMULATOR === "true").projectId }
+    ? { projectId }
     : {
         credential: credential.cert({
           clientEmail: firebaseClientEmail,
-          privateKey: firebasePrivateKey.replace(/\\n/g, "\n"),
+          privateKey: firebasePrivateKey,
+          projectId,
         }),
       };
-
 export const app: App =
   getApps().length === 0 ? initializeApp(getAppOptions(process.env.NODE_ENV === "development")) : getApp();
 
