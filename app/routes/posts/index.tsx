@@ -1,12 +1,15 @@
+import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { getPosts } from "~/models/post";
+import { requireUserSession } from "~/utils/session.server";
 
 interface LoaderData {
   posts: Awaited<ReturnType<typeof getPosts>>;
 }
 
-export const loader = async () => {
+export const loader: LoaderFunction = async ({ request }) => {
+  await requireUserSession(request);
   const posts = await getPosts();
 
   return json<LoaderData>({
