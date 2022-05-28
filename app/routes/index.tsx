@@ -10,8 +10,8 @@ interface LoaderData {
 
 export const loader: LoaderFunction = async ({ request }) => {
   const session = await requireUserSession(request);
-
   const user = await getUserFromSession(session);
+
   return json<LoaderData>({ user });
 };
 
