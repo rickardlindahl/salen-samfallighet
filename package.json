@@ -10,7 +10,8 @@
     "format:fix": "npm run prettier -- --write",
     "lint": "eslint app",
     "lint:fix": "npm run lint -- --fix",
-    "firebase:emulator": "npx firebase emulators:start --project development --only auth"
+    "firebase:emulators:start": "npx firebase emulators:start --project development --only auth,firestore --import=./firebase-seed",
+    "firebase:emulators:export": "npx firebase emulators:export --project development ./firebase-seed"
   },
   "dependencies": {
     "@remix-run/node": "^1.5.1",

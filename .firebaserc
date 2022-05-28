@@ -1,6 +1,7 @@
 {
   "projects": {
     "development": "demo-salen-samfallighetsforening",
-    "production": "salen-samfallighetsforening"
+    "production": "salen-samfallighetsforening",
+    "default": "salen-samfallighetsforening"
   }
 }
