@@ -4,6 +4,7 @@ import { Form, useSubmit } from "@remix-run/react";
 import { initializeApp } from "firebase/app";
 import { connectAuthEmulator, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import React, { useRef, useState } from "react";
+import { Button, Input } from "react-daisyui";
 import { getFirebaseConfig } from "~/firebase.config";
 import { createUserSession } from "~/utils/session.server";
 
@@ -62,28 +63,54 @@ const Login = () => {
   };
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h1>Login</h1>
-      <section>
-        <Form method="post" onSubmit={handleLogin}>
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" ref={emailRef} required />
-          <br />
+    <section className="h-screen">
+      <div className="container px-6 py-12 h-full">
+        <div className="flex flex-col justify-center items-center flex-wrap h-full g-6">
+          <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
+            <div className="mb-6">
+              <h1 className="text-4xl">Login</h1>
+            </div>
+            <Form method="post" onSubmit={handleLogin}>
+              <div className="mb-6">
+                <Input
+                  type="text"
+                  placeholder="Email address"
+                  ref={emailRef}
+                  name="email"
+                  required
+                  className="form-control block w-full px-4 py-2 text-base"
+                />
+              </div>
+              <div className="mb-6">
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  ref={passwordRef}
+                  name="password"
+                  required
+                  className="form-control block w-full px-4 py-2 text-base"
+                />
+              </div>
 
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" name="password" ref={passwordRef} required />
+              <input type="hidden" name="idToken" ref={idTokenRef} />
 
-          <input type="hidden" name="idToken" ref={idTokenRef} />
-          <br />
-          <button type="submit">Login</button>
-          {error?.code && (
-            <p>
-              <em>Login failed: {error.message}</em>
-            </p>
-          )}
-        </Form>
-      </section>
-    </div>
+              <div className="flex justify-between items-center mb-6">
+                <a href="#!">Forgot password?</a>
+              </div>
+              <Button type="submit" className="w-full px-4 py-2">
+                Sign in
+              </Button>
+
+              {error?.code && (
+                <p>
+                  <em>Login failed: {error.message}</em>
+                </p>
+              )}
+            </Form>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
