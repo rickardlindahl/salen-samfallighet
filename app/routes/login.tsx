@@ -63,7 +63,7 @@ const Login = () => {
   };
 
   return (
-    <section className="h-screen">
+    <section className="flex grow justify-center items-center">
       <div className="container px-6 py-12 h-full">
         <div className="flex flex-col justify-center items-center flex-wrap h-full g-6">
           <div className="md:w-8/12 lg:w-5/12 lg:ml-20">

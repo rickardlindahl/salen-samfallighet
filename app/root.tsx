@@ -39,9 +39,11 @@ const App = () => {
         <Links />
       </head>
       <body>
-        <Theme dataTheme="dark" className="font-sans">
+        <Theme dataTheme="dark" className="font-sans flex flex-col min-h-screen">
           <Outlet />
-          <Footer />
+          <div className="mt-auto">
+            <Footer />
+          </div>
         </Theme>
         <ScrollRestoration />
         <script
