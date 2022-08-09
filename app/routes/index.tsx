@@ -19,11 +19,13 @@ const Index = () => {
   const { user } = useLoaderData() as LoaderData;
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h1>Welcome to Remix</h1>
-      {user && <p>Hello, {user.email}</p>}
-      <Link to="/posts">Posts</Link>
-    </div>
+    <section className="flex grow justify-center items-center">
+      <div className="container px-6 py-12 h-full">
+        <h1>Welcome to Remix</h1>
+        {user && <p>Hello, {user.email}</p>}
+        <Link to="/posts">Posts</Link>
+      </div>
+    </section>
   );
 };
 

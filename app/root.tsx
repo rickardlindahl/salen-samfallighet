@@ -2,7 +2,7 @@ import type { LinksFunction, LoaderFunction, MetaFunction } from "@remix-run/nod
 import { json } from "@remix-run/node";
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from "@remix-run/react";
 import { Theme } from "react-daisyui";
-import { Footer } from "./components/Footer";
+import { Layout } from "./components/Layout";
 import styles from "./styles/app.css";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
@@ -40,10 +40,9 @@ const App = () => {
       </head>
       <body>
         <Theme dataTheme="dark" className="font-sans flex flex-col min-h-screen">
-          <Outlet />
-          <div className="mt-auto">
-            <Footer />
-          </div>
+          <Layout>
+            <Outlet />
+          </Layout>
         </Theme>
         <ScrollRestoration />
         <script
