@@ -1,6 +1,6 @@
 import type { ActionFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Form, useSubmit } from "@remix-run/react";
+import { Form, Link, useSubmit } from "@remix-run/react";
 import { initializeApp } from "firebase/app";
 import { connectAuthEmulator, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import React, { useRef, useState } from "react";
@@ -95,7 +95,7 @@ const Login = () => {
               <input type="hidden" name="idToken" ref={idTokenRef} />
 
               <div className="flex justify-between items-center mb-6">
-                <a href="#!">Forgot password?</a>
+                <Link to="/reset">Forgot password?</Link>
               </div>
               <Button type="submit" className="w-full px-4 py-2">
                 Sign in
