@@ -77,3 +77,13 @@ export const createUserSession = async (user: User, redirectTo?: string): Promis
     );
   }
 };
+
+export const logout = async (request: Request) => {
+  const session = await getUserSession(request);
+
+  return redirect("/login", {
+    headers: {
+      "Set-Cookie": await destroySession(session),
+    },
+  });
+};
