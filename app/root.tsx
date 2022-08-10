@@ -3,7 +3,10 @@ import { json } from "@remix-run/node";
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from "@remix-run/react";
 import { Theme } from "react-daisyui";
 import { Layout } from "./components/Layout";
+import { SessionContext } from "./components/SessionContext";
 import styles from "./styles/app.css";
+import type { User } from "./types/user";
+import { getUserFromSession, getUserSession } from "./utils/session.server";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
@@ -21,17 +24,28 @@ declare global {
   }
 }
 
-export const loader: LoaderFunction = async () => {
+export const loader: LoaderFunction = async ({ request }) => {
+  const session = await getUserSession(request);
+
+  const user = await getUserFromSession(session);
+
   return json({
+    isLoggedIn: session.has("idToken"),
+    user,
     ENV: {
       USE_FIREBASE_EMULATOR: process.env.USE_FIREBASE_EMULATOR === "true",
     },
   });
 };
 
-const App = () => {
-  const data: { ENV: Window["ENV"] } = useLoaderData();
+interface LoaderData {
+  ENV: Window["ENV"];
+  isLoggedIn: boolean;
+  user: User;
+}
 
+const App = () => {
+  const { ENV, isLoggedIn, user }: LoaderData = useLoaderData();
   return (
     <html lang="en">
       <head>
@@ -40,14 +54,16 @@ const App = () => {
       </head>
       <body>
         <Theme dataTheme="dark" className="font-sans flex flex-col min-h-screen">
-          <Layout>
-            <Outlet />
-          </Layout>
+          <SessionContext.Provider value={{ isLoggedIn, user: isLoggedIn ? user : undefined }}>
+            <Layout>
+              <Outlet />
+            </Layout>
+          </SessionContext.Provider>
         </Theme>
         <ScrollRestoration />
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
+            __html: `window.ENV = ${JSON.stringify(ENV)}`,
           }}
         />
         <Scripts />
