@@ -5,7 +5,7 @@ import { NavigationMenu } from "./NavigationMenu";
 import { useSession } from "./SessionContext";
 
 export const Layout = ({ children }: React.PropsWithChildren<{}>) => {
-  const { isLoggedIn } = useSession();
+  const { user } = useSession();
   const [visible, setVisible] = useState(false);
 
   const toggleVisible = () => {
@@ -35,13 +35,13 @@ export const Layout = ({ children }: React.PropsWithChildren<{}>) => {
               </Button>
             </div>
             <div className="flex-1 px-2 mx-2">
-              <h5 className="text-base font-bold">Salen</h5>
+              <h4 className="text-base font-bold">Salen</h4>
             </div>
           </Navbar.Start>
           <Navbar.End>
-            <div className="flex-none hidden md:block">
+            <div className="flex-none hidden md:flex">
               <NavigationMenu horizontal />
-              {isLoggedIn && (
+              {user && (
                 <Dropdown>
                   <Dropdown.Toggle>
                     <svg
@@ -60,6 +60,9 @@ export const Layout = ({ children }: React.PropsWithChildren<{}>) => {
                     </svg>
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="w-52 left-[-9rem] bg-base-300">
+                    <Dropdown.Item className="pointer-events-none content-center flex" style={{ maxWidth: "100%" }}>
+                      <div className="text-xs text-ellipsis overflow-hidden">{user.email}</div>
+                    </Dropdown.Item>
                     <Dropdown.Item style={{ width: "100%" }}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
