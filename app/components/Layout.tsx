@@ -34,7 +34,9 @@ export const Layout = ({ children }: React.PropsWithChildren<{}>) => {
                 </svg>
               </Button>
             </div>
-            <div className="flex-1 px-2 mx-2">Salen</div>
+            <div className="flex-1 px-2 mx-2">
+              <h5 className="text-base font-bold">Salen</h5>
+            </div>
           </Navbar.Start>
           <Navbar.End>
             <div className="flex-none hidden md:block">
