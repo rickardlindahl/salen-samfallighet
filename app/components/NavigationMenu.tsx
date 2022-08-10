@@ -1,11 +1,12 @@
 import { Menu } from "react-daisyui";
+import { clsx } from "clsx";
 
 interface NavigationMenuProps {
   horizontal: boolean;
 }
 
 export const NavigationMenu = ({ horizontal }: NavigationMenuProps) => (
-  <Menu horizontal={horizontal} className={horizontal ? "" : "p-4 overflow-y-auto w-80 bg-base-100"}>
+  <Menu horizontal={horizontal} className={clsx(!horizontal && "p-4 overflow-y-auto w-80 bg-base-100")}>
     <Menu.Item>
       <a>
         <svg
