@@ -14,3 +14,6 @@ firebaseServiceAccountKey.json
 firebase-debug.log
 firestore-debug.log
 ui-debug.log
+
+# Tailwind css output
+app/styles/*.css
