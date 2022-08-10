@@ -7,12 +7,22 @@ export const Footer = () => (
     </div>
     <div>
       <DaisyFooter.Title>Länkar</DaisyFooter.Title>
-      <a className="link link-hover" href="https://driftinfo.umeaenergi.se/">
-        Umeå Energi driftinfo
-      </a>
-      <a className="link link-hover" href="Återvinningscentralernas öppettider">
-        Vakin
-      </a>
+      {[
+        {
+          text: "Umeå Energi driftinfo",
+          key: "umea-energi",
+          href: "https://driftinfo.umeaenergi.se/",
+        },
+        {
+          text: "Återvinningscentralernas öppettider",
+          key: "vakin-oppettider",
+          href: "https://www.vakin.se/tjansterochabonnemang/lamnaavfall/oppettider.4.682b00ae16206de094712b0e.htmder",
+        },
+      ].map(({ text, key, href }) => (
+        <a key={key} className="link link-hover" href={href} target="_blank" rel="noreferrer">
+          {text}
+        </a>
+      ))}
     </div>
     <div>
       <DaisyFooter.Title>Ser något fel ut?</DaisyFooter.Title>
