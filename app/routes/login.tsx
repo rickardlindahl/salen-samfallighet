@@ -66,7 +66,7 @@ const Login = () => {
     <section className="flex grow justify-center items-center">
       <div className="container px-6 py-12 h-full">
         <div className="flex flex-col justify-center items-center flex-wrap h-full g-6">
-          <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
+          <div className="w-10/12 lg:w-8/12 xl:w-6/12">
             <div className="mb-6">
               <h1 className="text-4xl">Login</h1>
             </div>
