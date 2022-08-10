@@ -60,10 +60,12 @@ export const NavigationMenu = ({ horizontal }: NavigationMenuProps) => {
               </a>
             </Menu.Item>
             <Menu.Item>
-              <a>
-                <LogoutIcon />
-                Logga ut
-              </a>
+              <form action="/logout" method="post">
+                <button type="submit" className="button flex w-full" style={{ gap: "0.75rem" }}>
+                  <LogoutIcon />
+                  Logga ut
+                </button>
+              </form>
             </Menu.Item>
           </Menu>
         </>

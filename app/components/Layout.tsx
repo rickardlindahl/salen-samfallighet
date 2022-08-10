@@ -52,8 +52,12 @@ export const Layout = ({ children }: React.PropsWithChildren<{}>) => {
                       Byt lösenord
                     </Dropdown.Item>
                     <Dropdown.Item style={{ width: "100%" }}>
-                      <LogoutIcon />
-                      Logga ut
+                      <form action="/logout" method="post">
+                        <button type="submit" className="button flex w-full" style={{ gap: "0.75rem" }}>
+                          <LogoutIcon />
+                          Logga ut
+                        </button>
+                      </form>
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
