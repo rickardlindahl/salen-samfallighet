@@ -3,7 +3,7 @@ import { Footer as DaisyFooter } from "react-daisyui";
 export const Footer = () => (
   <DaisyFooter className="p-10 bg-neutral text-neutral-content">
     <div>
-      <h5 className="text-base font-bold">Salen samfällighetsförening</h5>
+      <h4 className="text-base font-bold">Salen samfällighetsförening</h4>
     </div>
     <div>
       <DaisyFooter.Title>Länkar</DaisyFooter.Title>
