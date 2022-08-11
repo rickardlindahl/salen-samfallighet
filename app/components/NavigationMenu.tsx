@@ -1,3 +1,4 @@
+import { Form } from "@remix-run/react";
 import { clsx } from "clsx";
 import { Divider, Menu } from "react-daisyui";
 import { AddressIcon } from "./icons/AddressIcon";
@@ -60,12 +61,12 @@ export const NavigationMenu = ({ horizontal }: NavigationMenuProps) => {
               </a>
             </Menu.Item>
             <Menu.Item>
-              <form action="/logout" method="post">
+              <Form action="/logout" method="post">
                 <button type="submit" className="button flex w-full" style={{ gap: "0.75rem" }}>
                   <LogoutIcon />
                   Logga ut
                 </button>
-              </form>
+              </Form>
             </Menu.Item>
           </Menu>
         </>

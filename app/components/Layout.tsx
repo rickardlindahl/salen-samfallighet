@@ -1,3 +1,4 @@
+import { Form } from "@remix-run/react";
 import React, { useState } from "react";
 import { Button, Drawer, Dropdown, Navbar } from "react-daisyui";
 import { Footer } from "./Footer";
@@ -52,12 +53,12 @@ export const Layout = ({ children }: React.PropsWithChildren<{}>) => {
                       Byt lösenord
                     </Dropdown.Item>
                     <Dropdown.Item style={{ width: "100%" }}>
-                      <form action="/logout" method="post">
+                      <Form action="/logout" method="post">
                         <button type="submit" className="button flex w-full" style={{ gap: "0.75rem" }}>
                           <LogoutIcon />
                           Logga ut
                         </button>
-                      </form>
+                      </Form>
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
